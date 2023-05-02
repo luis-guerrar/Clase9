@@ -388,6 +388,9 @@ class Ventana1(QMainWindow):
                 ))
             self.file.close()
             self.accion_botonLimpiar()
+            self.mensaje.setText("Datos ingresados correctamente")
+            # Hacemos que se vea la ventana
+            self.ventanaDialogo.exec_()
             self.file = open('datos/clientes.txt', 'rb')
             while self.file:
                 linea = self.file.readline().decode('UTF-8')
