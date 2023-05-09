@@ -277,8 +277,10 @@ class Ventana1(QMainWindow):
                                      "margin-top: 40px;")
 
         self.ladoDerecho.addRow(self.btnBuscar, self.btnRecuperar)
+        # Hacemos que el botón buscar tenga su método
+        self.btnRecuperar.clicked.connect(self.accion_botonRecuperar)
 
-        # Agregamos el layout derecho al layout horizontal
+        # Agregamos el layout derecho al layout lado derecho
         self.horizontal.addLayout(self.ladoDerecho)
 
 
@@ -442,7 +444,7 @@ class Ventana1(QMainWindow):
                 linea = self.file.readline().decode('UTF-8')
                 lista = linea.split(";")
 
-                # paramos el bucle si ya no encuentra mas registros en el archivo
+                # paramos el bucle si ya no encuentra más registros en el archivo
                 if linea == '':
                     break
 
@@ -457,9 +459,7 @@ class Ventana1(QMainWindow):
                     lista[7],
                     lista[8],
                     lista[9],
-                    lista[10],
-                    lista[11],
-                )
+                    lista[10])
                 # Agregar los datos a la lista
                 usuarios.append(u)
 
@@ -471,14 +471,13 @@ class Ventana1(QMainWindow):
             existeDocumento = False
 
             # buscamos en la lista de usuarios si existe la cédula
-
             for u in usuarios:
                 # Buscamos en la lista si existe la cédula ingresada
                 if u.documento == self.documento.text():
                     # Mostramos las preguntas en el formulario
-                    self.respuesta1.setText(u.respuesta1)
-                    self.respuesta2.setText(u.respuesta2)
-                    self.respuesta3.setText(u.respuesta3)
+                    self.pregunta1.setText(u.pregunta1)
+                    self.pregunta2.setText(u.pregunta2)
+                    self.pregunta3.setText(u.pregunta3)
 
                     # indicamos que existen
                     existeDocumento = True
@@ -490,6 +489,108 @@ class Ventana1(QMainWindow):
                 self.mensaje.setText(f"No existe usuario con este documento.{self.documento.text()}")
                 self.ventanaDialogo.exec_()
                 self.documento.setText('')
+
+    def accion_botonRecuperar(self):
+        self.datosCorrectos = True
+        self.datosCorrectos = True
+
+        self.ventanaDialogo.setWindowTitle("Recuperar contraseña")
+
+        if (self.pregunta1.text() == '' or
+                self.pregunta2.text() == '' or
+                self.pregunta3.text() == ''):
+            self.datosCorrectos = False
+
+            self.mensaje.setText("Para recuperar la contraseña debe:"
+                                 "\nbuscar las preguntas de verificación."
+                                 "\n\nPrimero ingrese su documento y luego"
+                                 "\npresione el boton 'buscar'.")
+
+            self.ventanaDialogo.exec_()
+
+        # Validamos si se buscaron las preguntas pero no se ingresaron las respuestas
+        if (self.pregunta1.text() != '' and
+                self.respuesta1.text() == '' and
+                self.pregunta2.text() != '' and
+                self.respuesta2.text() == '' and
+                self.pregunta3.text() != '' and
+                self.respuesta3.text() == ''):
+
+            self.datosCorrectos = False
+
+            self.mensaje.setText("Para recuperar la contraseña debe:"
+                                 "\nIngresar las respuestas a cada pregunta.")
+
+            self.ventanaDialogo.exec_()
+
+        # condicional si son correctos
+        if self.datosCorrectos:
+
+            # Abrimos el archivo en modo lectura
+            linea = self.file = open('datos/clientes.txt', 'rb')
+
+            # creamos Array lista vacía
+            usuarios = []
+
+            while self.file:
+                linea = self.file.readline().decode('UTF-8')
+                lista = linea.split(";")
+
+                if linea == '':
+                    break
+
+                # creamos un objeto tipo cliente llamado u
+
+                u = Cliente(
+                    lista[0],
+                    lista[1],
+                    lista[2],
+                    lista[3],
+                    lista[4],
+                    lista[5],
+                    lista[6],
+                    lista[7],
+                    lista[8],
+                    lista[9],
+                    lista[10])
+                usuarios.append(u)
+            self.file.close()
+
+            # en este punto tenemos la lista con la lista de usuarios
+
+            # variable para controlar si existe el documento
+
+            existeDocumento = False
+
+            resp1 = ''
+            resp2 = ''
+            resp3 = ''
+            passw = ''
+
+            # buscamos en la lista usuario por usuario si existe la cedula:
+            for u in usuarios:
+                if u.documento == self.documento.text():
+                    existeDocumento = True
+                    resp1 = u.respuesta1
+                    resp2 = u.respuesta2
+                    resp3 = u.respuesta3
+                    passw = u.clave
+                    break
+
+            if (self.respuesta1.text().lower().strip() == resp1.lower().strip() and
+                    self.respuesta2.text().lower().strip() == resp2.lower().strip() and
+                    self.respuesta3.text().lower().strip() == resp3.lower().strip()):
+                # limpiamos los campos
+                self.accion_botonLimpiar()
+                self.mensaje.setText(f"Contraseña: {passw}")
+                self.ventanaDialogo.exec_()
+
+            else:
+                self.mensaje.setText("Las respuesta son incorrectas"
+                                     "\npara estas preguntas de recuperación."
+                                     "\n\nVuelva a intentarlo")
+
+                self.ventanaDialogo.exec_()
 
 
 if __name__ == '__main__':
