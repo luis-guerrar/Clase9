@@ -334,8 +334,7 @@ class Ventana1(QMainWindow):
         self.vertical.addWidget(self.opciones)
         # Establecemos el layout de la ventana
         self.ventanaDialogo.setLayout(self.vertical)
-        # Variables de datos correctos
-        self.datosCorrectos = True
+
 
     # Método del botón limpiar
     def accion_botonLimpiar(self):
@@ -354,7 +353,8 @@ class Ventana1(QMainWindow):
 
     # Método del botón Registrar
     def accion_botonRegistrar(self):
-
+        # Variables de datos correctos
+        self.datosCorrectos = True
         # Validamos que las claves sean iguales
         if (self.clave.text() != self.clave2.text()):
             self.datosCorrectos = False
@@ -411,7 +411,9 @@ class Ventana1(QMainWindow):
             self.file.close()
 
     def accion_botonBuscar(self):
-        # ttulo ventana
+        # Variables de datos correctos
+        self.datosCorrectos = True
+        # Título ventana
         self.ventanaDialogo.setWindowTitle("Buscar preguntas de validación")
 
         # Validar que se haya ingresado el documento
@@ -487,6 +489,7 @@ class Ventana1(QMainWindow):
             if not existeDocumento:
                 self.mensaje.setText(f"No existe usuario con este documento.{self.documento.text()}")
                 self.ventanaDialogo.exec_()
+                self.documento.setText('')
 
 
 if __name__ == '__main__':
