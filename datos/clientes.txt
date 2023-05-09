@@ -1,1 +1,3 @@
 nombre;usuario;clave;123;corre;pregunta;pregunta;pregunta;respuesta;respuesta;respuesta
+Sebastian Ramirez;srrendo;12345;1040753154;sebas.240796@gmail.com;Nombre padre;Nombre madre;Nombre hermano mayor;Luis;Gloria;Estiven
+Luis;Luidfernando;123456;1077462451;luidguerr@gmai.com;Nombre mascota;Nombre Madre;Nombre Hermano;Keila;Ligia;Juan

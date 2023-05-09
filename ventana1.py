@@ -389,7 +389,6 @@ class Ventana1(QMainWindow):
                 self.nombreCompleto.text() + ";"
                 + self.usuario.text() + ";"
                 + self.clave.text() + ";"
-                + self.clave2.text() + ";"
                 + self.documento.text() + ";"
                 + self.correo.text() + ";"
                 + self.pregunta1.text() + ";"
@@ -407,7 +406,7 @@ class Ventana1(QMainWindow):
             self.file = open('datos/clientes.txt', 'rb')
             while self.file:
                 linea = self.file.readline().decode('UTF-8')
-                print(linea)
+                #print(linea)
                 if linea == '':
                     break
             self.file.close()
@@ -570,6 +569,7 @@ class Ventana1(QMainWindow):
             # buscamos en la lista usuario por usuario si existe la cedula:
             for u in usuarios:
                 if u.documento == self.documento.text():
+                    #print(u.respuesta1,u.respuesta2,u.respuesta3)
                     existeDocumento = True
                     resp1 = u.respuesta1
                     resp2 = u.respuesta2
