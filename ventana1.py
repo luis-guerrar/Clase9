@@ -352,7 +352,9 @@ class Ventana1(QMainWindow):
         self.respuesta1.setText('')
         self.respuesta2.setText('')
         self.respuesta3.setText('')
-
+        self.pregunta1.setEnabled(True)
+        self.pregunta2.setEnabled(True)
+        self.pregunta3.setEnabled(True)
     # Método del botón Registrar
     def accion_botonRegistrar(self):
         # Variables de datos correctos
@@ -477,6 +479,9 @@ class Ventana1(QMainWindow):
                     self.pregunta1.setText(u.pregunta1)
                     self.pregunta2.setText(u.pregunta2)
                     self.pregunta3.setText(u.pregunta3)
+                    self.pregunta1.setEnabled(False)
+                    self.pregunta2.setEnabled(False)
+                    self.pregunta3.setEnabled(False)
 
                     # indicamos que existen
                     existeDocumento = True
