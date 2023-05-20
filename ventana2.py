@@ -152,7 +152,6 @@ class Ventana2(QMainWindow):
                                         "padding: 10px;")
 
         self.btnVolver.clicked.connect(self.accionBotonVolver)
-        self.vertical.addWidget(self.btnVolver)
 
         # -------------- BOTÓN FORMA TABULAR -------------------
         self.btnTabularForm = QPushButton("Forma Tabular")
@@ -163,6 +162,7 @@ class Ventana2(QMainWindow):
 
         self.btnTabularForm.clicked.connect(self.accionBotonTabularForm)
         self.vertical.addWidget(self.btnTabularForm)
+        self.vertical.addWidget(self.btnVolver)
 
         # --------- OJO IMPORTANTE PONER AL FINAL --------------
 
