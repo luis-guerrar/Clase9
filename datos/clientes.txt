@@ -1,4 +1,5 @@
-1;1;1;1;1;1;1;1;1;1;1;1
-q;q;q;q;q;q;e;e;e;e;e;e
-1;1;1;1;1;1;1;1;1;1;1;1
-1;1;1;1;8777;1;1;1;1;1;1;1
+Manuela;manu;123456;1000001255;manuela.jurado@elpoli;Primer Nombre;Apellido;Edad;Manuela;Jurado;17
+Sebastian Ramirez;srrendo;123456;1040753154;sebas.240796@gmail.com;Nombre padre;Nombre madre;Nombre hermano mayor;Luis;Gloria;Estiven
+Luis Fernando;lufguerr;123456;1077462451;luidguerr@gmai.com;Nombre mascota;Nombre Madre;Nombre Hermano;Keila;Ligia;Juan
+Sergio;Tienda;123456;1020407032;sergio@losandes.com;Nombre Tienda;Apellido;Segundo Nombre;Los Andes;Del Rio;Antonio
+Juan;JuaGuerra;123456;102030405060;juanguerra@gmail.com;Nombre Mascota;Sector vivienda;Cantidad de hijos (letras);Tony;4;uno
