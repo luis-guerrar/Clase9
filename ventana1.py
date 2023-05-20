@@ -13,10 +13,11 @@ class Ventana1(QMainWindow):
     # Hacer el método de construcción de la ventana
     def __init__(self, parent=None):
         super().__init__(parent)
+
         # Poner el título
         self.setWindowTitle("Formulario de registro")
 
-        # Poner el ícono
+        # Poner el icono
         self.setWindowIcon(QtGui.QIcon('imagenes/icono.png'))
 
         # Establecer las propiedades de ancho y alto
