@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QMainWindow, QDesktopWidget, QLabel, QHBoxLayout, QA
     QLineEdit, QDialog, QDialogButtonBox, QVBoxLayout
 from PyQt5 import QtGui, QtCore
 from cliente import Cliente
+from ventana2 import Ventana2
 
 class Ventana1(QMainWindow):
 
@@ -276,66 +277,75 @@ class Ventana1(QMainWindow):
                                      "padding: 10px;"
                                      "margin-top: 40px;")
 
-        self.ladoDerecho.addRow(self.btnBuscar, self.btnRecuperar)
         # Hacemos que el botón buscar tenga su método
         self.btnRecuperar.clicked.connect(self.accion_botonRecuperar)
+        self.ladoDerecho.addRow(self.btnBuscar, self.btnRecuperar)
+
+        # Hacemos el botón para recuperar
+        self.btnContinuar = QPushButton("Continuar")
+        self.btnContinuar.setFixedWidth(186)
+        self.btnContinuar.setStyleSheet("background-color: #008B45;"
+                                        "color: #FFFFFF;"
+                                        "padding: 10px;")
+
+        self.btnContinuar.clicked.connect(self.accion_botonContinuar)
+        self.ladoDerecho.addRow(self.btnContinuar)
 
         # Agregamos el layout derecho al layout lado derecho
         self.horizontal.addLayout(self.ladoDerecho)
 
+        # Creamos una ventana de diálogo
+        self.ventanaDialogo = QDialog(None, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
+        self.ventanaDialogo.resize(300, 150)
+        # Creamos el botón aceptar
+        self.btnAceptar = QDialogButtonBox.Ok
+        self.opciones = QDialogButtonBox(self.btnAceptar)
+        self.opciones.accepted.connect(self.ventanaDialogo.accept)
+        # Establecemos el título de la ventana
+        self.ventanaDialogo.setWindowTitle("Formulario de registro")
+        # Configuramos la ventana para que sea modal
+        self.ventanaDialogo.setWindowModality(Qt.ApplicationModal)
+        # Creamos un layout vertical
+        self.vertical = QVBoxLayout()
+        # Creamos un label para los mensajes
+        self.mensaje = QLabel("")
+        # Le ponemos estilos al mensaje
+        self.mensaje.setStyleSheet("background-color: #008B45; color: #FFFFFF; padding: 10px;")
+        # Agregamos el label de mensajes
+        self.vertical.addWidget(self.mensaje)
+        # Agregamos las opciones de los botones
+        self.vertical.addWidget(self.opciones)
+        # Establecemos el layout de la ventana
+        self.ventanaDialogo.setLayout(self.vertical)
+
+        # Creamos una ventana de diálogo
+        self.ventanaDialogo = QDialog(None, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
+        self.ventanaDialogo.resize(300, 150)
+        # Creamos el botón aceptar
+        self.btnAceptar = QDialogButtonBox.Ok
+        self.opciones = QDialogButtonBox(self.btnAceptar)
+        self.opciones.accepted.connect(self.ventanaDialogo.accept)
+        # Establecemos el título de la ventana
+        self.ventanaDialogo.setWindowTitle("Formulario de registro")
+        # Configuramos la ventana para que sea modal
+        self.ventanaDialogo.setWindowModality(Qt.ApplicationModal)
+        # Creamos un layout vertical
+        self.vertical = QVBoxLayout()
+        # Creamos un label para los mensajes
+        self.mensaje = QLabel("")
+        # Le ponemos estilos al mensaje
+        self.mensaje.setStyleSheet("background-color: #008B45; color: #FFFFFF; padding: 10px;")
+        # Agregamos el label de mensajes
+        self.vertical.addWidget(self.mensaje)
+        # Agregamos las opciones de los botones
+        self.vertical.addWidget(self.opciones)
+        # Establecemos el layout de la ventana
+        self.ventanaDialogo.setLayout(self.vertical)
 
         # --------- OJO IMPORTANTE PONER AL FINAL --------------
 
         # Indicamos que el Layout principal del fondo es horizontal
         self.fondo.setLayout(self.horizontal)
-
-        # Creamos una ventana de diálogo
-        self.ventanaDialogo = QDialog(None, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
-        self.ventanaDialogo.resize(300, 150)
-        # Creamos el botón aceptar
-        self.btnAceptar = QDialogButtonBox.Ok
-        self.opciones = QDialogButtonBox(self.btnAceptar)
-        self.opciones.accepted.connect(self.ventanaDialogo.accept)
-        # Establecemos el título de la ventana
-        self.ventanaDialogo.setWindowTitle("Formulario de registro")
-        # Configuramos la ventana para que sea modal
-        self.ventanaDialogo.setWindowModality(Qt.ApplicationModal)
-        # Creamos un layout vertical
-        self.vertical = QVBoxLayout()
-        # Creamos un label para los mensajes
-        self.mensaje = QLabel("")
-        # Le ponemos estilos al mensaje
-        self.mensaje.setStyleSheet("background-color: #008B45; color: #FFFFFF; padding: 10px;")
-        # Agregamos el label de mensajes
-        self.vertical.addWidget(self.mensaje)
-        # Agregamos las opciones de los botones
-        self.vertical.addWidget(self.opciones)
-        # Establecemos el layout de la ventana
-        self.ventanaDialogo.setLayout(self.vertical)
-
-        # Creamos una ventana de diálogo
-        self.ventanaDialogo = QDialog(None, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
-        self.ventanaDialogo.resize(300, 150)
-        # Creamos el botón aceptar
-        self.btnAceptar = QDialogButtonBox.Ok
-        self.opciones = QDialogButtonBox(self.btnAceptar)
-        self.opciones.accepted.connect(self.ventanaDialogo.accept)
-        # Establecemos el título de la ventana
-        self.ventanaDialogo.setWindowTitle("Formulario de registro")
-        # Configuramos la ventana para que sea modal
-        self.ventanaDialogo.setWindowModality(Qt.ApplicationModal)
-        # Creamos un layout vertical
-        self.vertical = QVBoxLayout()
-        # Creamos un label para los mensajes
-        self.mensaje = QLabel("")
-        # Le ponemos estilos al mensaje
-        self.mensaje.setStyleSheet("background-color: #008B45; color: #FFFFFF; padding: 10px;")
-        # Agregamos el label de mensajes
-        self.vertical.addWidget(self.mensaje)
-        # Agregamos las opciones de los botones
-        self.vertical.addWidget(self.opciones)
-        # Establecemos el layout de la ventana
-        self.ventanaDialogo.setLayout(self.vertical)
 
 
     # Método del botón limpiar
@@ -597,10 +607,16 @@ class Ventana1(QMainWindow):
 
                 self.ventanaDialogo.exec_()
 
+    def accion_botonContinuar(self):
+        self.hide()
+        self.ventana2 = Ventana2(self)
+        self.ventana2.show()
+
+
 
 if __name__ == '__main__':
 
-    app= QApplication(sys.argv)
+    app = QApplication(sys.argv)
 
     ventana1 = Ventana1()
 
