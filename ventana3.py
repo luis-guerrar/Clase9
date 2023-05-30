@@ -1,9 +1,10 @@
 import sys
 
 from PyQt5 import QtGui
-from PyQt5.QtGui import QPixmap, QFont
+from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtGui import QPixmap, QFont, QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QDesktopWidget, QVBoxLayout, QScrollArea, QTableWidget, \
-    QTableWidgetItem, QPushButton
+    QTableWidgetItem, QPushButton, QToolBar, QAction
 from cliente import Cliente
 
 class Ventana3(QMainWindow):
@@ -46,8 +47,6 @@ class Ventana3(QMainWindow):
         self.resize(self.imagenFondo.width(), self.imagenFondo.height())
         # Establecemos la ventana de fondo como la ventana central
         self.setCentralWidget(self.fondo)
-        # Establecemos la distribución de los elementos con Layout horizontal
-        self.vertical = QVBoxLayout()
 
         self.file = open('datos/clientes.txt', 'rb')
         self.usuarios = []
@@ -81,6 +80,31 @@ class Ventana3(QMainWindow):
                 a obtener el número de usuarios y consultamos el tamaño de la lista'''
         self.numeroUsuarios = len(self.usuarios)
         self.contador = 0
+        # Establecemos la distribución de los elementos con Layout vertical
+        self.vertical = QVBoxLayout()
+
+        # CONSTRUIR EL MENÚ TOOL BAR
+        self.toolbar = QToolBar('Main toolbar')
+        self.toolbar.setIconSize(QSize(32, 32))
+        self.addToolBar(self.toolbar)
+
+        # Eliminar
+        self.delete = QAction(QIcon('imagenes/delete.png'), '&Delete', self)
+        self.delete.triggered.connect(self.accionDelete)
+        self.toolbar.addAction(self.delete)
+
+        # Agregar
+        self.add = QAction(QIcon('imagenes/add.png'), '&Add', self)
+        self.add.triggered.connect(self.accionAdd)
+        self.toolbar.addAction(self.add)
+
+        # Editar
+        self.edit = QAction(QIcon('imagenes/edit.png'), '&Edit', self)
+        self.edit.triggered.connect(self.accionEdit)
+        self.toolbar.addAction(self.edit)
+        # FIN TOOLBAR
+
+
         # Hacemos el letrero
         self.letrero1 = QLabel()
 
@@ -136,9 +160,12 @@ class Ventana3(QMainWindow):
 
         for u in self.usuarios:
             self.tabla.setItem(self.contador, 0, QTableWidgetItem(u.nombreCompleto))
+            # Hacemos que no se pueda editar
+            self.tabla.item(self.contador, 0).setFlags(Qt.ItemIsEnabled)
             self.tabla.setItem(self.contador, 1, QTableWidgetItem(u.usuario))
             self.tabla.setItem(self.contador, 2, QTableWidgetItem(u.clave))
             self.tabla.setItem(self.contador, 3, QTableWidgetItem(u.documento))
+            self.tabla.item(self.contador, 3).setFlags(Qt.ItemIsEnabled)
             self.tabla.setItem(self.contador, 4, QTableWidgetItem(u.correo))
             self.tabla.setItem(self.contador, 5, QTableWidgetItem(u.pregunta1))
             self.tabla.setItem(self.contador, 6, QTableWidgetItem(u.pregunta2))
@@ -172,4 +199,21 @@ class Ventana3(QMainWindow):
     def accionBotonVolver(self):
         self.hide()
         self.ventanaAnterior.show()
+
+    def accionDelete(self):
+        pass
+    def accionAdd(self):
+        pass
+    def accionEdit(self):
+        pass
+
+if __name__ == '__main__':
+
+    app = QApplication(sys.argv)
+
+    ventana3 = Ventana3()
+
+    ventana3.show()
+
+    sys.exit(app.exec_())
 
