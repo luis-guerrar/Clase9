@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QMainWindow, QDesktopWidget, QLabel, QVBoxLayout, QA
 
 from cliente import Cliente
 from ventana3 import Ventana3
+from ventana4 import Ventana4
 
 class Ventana2(QMainWindow):
 
@@ -169,8 +170,11 @@ class Ventana2(QMainWindow):
         # Indicamos que el Layout principal del fondo es vertical
         self.fondo.setLayout(self.vertical)
 
-    def accionBotones(self, cc):
-        print(cc)
+    def accionBotones(self, cedulaUsuario):
+        #print(cedulaUsuario)
+        self.hide()
+        self.ventana4 = Ventana4(self, cedulaUsuario)
+        self.ventana4.show()
 
     def accionBotonVolver(self):
         self.hide()
