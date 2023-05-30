@@ -452,16 +452,11 @@ class Ventana4(QMainWindow):
 
         if self.datosCorrectos:
             self.ventanaDialogoEliminar = QDialog(None, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
-
             self.ventanaDialogoEliminar.resize(300, 150)
-
             self.ventanaDialogoEliminar.setWindowModality(Qt.ApplicationModal)
-
             self.verticalEliminar = QVBoxLayout()
-
             self.mensajeEliminar = QLabel("¿Estas seguro que desea eliminar este registro de usuario?")
             self.mensajeEliminar.setStyleSheet('background-color: #008B45; color: #FFFFFF; padding: 10 px;')
-
             self.verticalEliminar.addWidget(self.mensajeEliminar)
 
             # Se agregaron los botones aceptar y cancelar
